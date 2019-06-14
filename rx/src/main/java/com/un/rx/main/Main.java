@@ -1,14 +1,9 @@
 package com.un.rx.main;
 
-import java.util.concurrent.TimeUnit;
-
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
-import io.reactivex.schedulers.Schedulers;
 
 class Main {
 
@@ -115,18 +110,17 @@ class Main {
 				//过滤重复数据
 				//				.distinct()
 				//
-				.filter(new Predicate<String>() {
-					@Override
-					public boolean test(String s) throws Exception {
-						return s.length() > 5;
-					}
-				})
+				//				.filter(new Predicate<String>() {
+				//					@Override
+				//					public boolean test(String s) throws Exception {
+				//						return s.length() > 5;
+				//					}
+				//				})
 				//组合操作符
 				//
 				//				.mergeWith(Observable.just("conbine0", "conbine1", "conbine2"))
 				//
 				//				.startWith(ob1)
-
 				.subscribe(
 						TEST_CONSUMER_NEXT
 						, TEST_CONSUMER_ERROR
