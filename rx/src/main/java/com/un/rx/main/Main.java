@@ -1,9 +1,12 @@
 package com.un.rx.main;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 class Main {
 
@@ -108,7 +111,7 @@ class Main {
 				//				})
 				//过滤操作符
 				//过滤重复数据
-				//				.distinct()
+				.distinct()
 				//
 				//				.filter(new Predicate<String>() {
 				//					@Override
@@ -121,11 +124,18 @@ class Main {
 				//				.mergeWith(Observable.just("conbine0", "conbine1", "conbine2"))
 				//
 				//				.startWith(ob1)
+				.subscribeOn(Schedulers.single())
+				.observeOn(Schedulers.trampoline())
 				.subscribe(
 						TEST_CONSUMER_NEXT
 						, TEST_CONSUMER_ERROR
 						, TEST_CONSUMER_CONPLETE
 						, TEST_CONSUMER_SUB
 				);
+		Observable.create(new ObservableOnSubscribe<Object>() {
+			@Override
+			public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
+			}
+		}).subscribe();
 	}
 }
